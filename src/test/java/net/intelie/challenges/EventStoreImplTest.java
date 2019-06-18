@@ -36,7 +36,7 @@ class EventStoreImplTest {
 		eventStore.insert(event2);
 		eventStore.insert(event3);
 		eventStore.insert(event4);
-		
+
 		TreeSet<Event> expectedSet = new TreeSet<>();
 		expectedSet.add(event1);
 		expectedSet.add(event2);
@@ -56,7 +56,7 @@ class EventStoreImplTest {
 		eventStore.insert(event3);
 		eventStore.insert(event4);
 		eventStore.removeAll(typeToRemove);
-		
+
 		assertEquals(emptySet, eventStore.set());
 		assertEquals(0, eventStore.set().size());
 	}
@@ -85,7 +85,7 @@ class EventStoreImplTest {
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		eventList.add(event4);
 		eventList.add(event8);
-		
+
 		eventStore.insert(event1);
 		eventStore.insert(event2);
 		eventStore.insert(event3);
@@ -94,13 +94,28 @@ class EventStoreImplTest {
 		eventStore.insert(event6);
 		eventStore.insert(event7);
 		eventStore.insert(event8);
-		
+
 		EventIterator iterator = eventStore.query(iteratorType, lowerBound, higherBound);
 		int count = 0;
-		while(iterator.moveNext()) {
+		while (iterator.moveNext()) {
 			assertTrue(eventList.contains(iterator.current()));
 			count++;
 		}
 		assertEquals(count, eventList.size());
 	}
+
+	@Test
+	void testQueryWhenNoEvents() {
+		String iteratorType = "type1";
+		long lowerBound = 4, higherBound = 20;
+		eventStore.set().clear();
+
+		EventIterator iterator = eventStore.query(iteratorType, lowerBound, higherBound);
+		int count = 0;
+		while (iterator.moveNext()) {
+			count++;
+		}
+		assertEquals(0, count);
+	}
+
 }

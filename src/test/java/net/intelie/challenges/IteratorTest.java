@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Iterator;
 import java.util.TreeSet;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,14 +34,6 @@ class IteratorTest {
 		difTypeSet.add(new Event("type1", 8));
 		difTypeSet.add(new Event("type2", 10));
 		difTypeSet.add(new Event("type1", 9));
-	}
-
-	@Test
-	void testConstructor() {
-		Iterator<Event> it = emptySet.iterator();
-		iteratorObject = new EventIteratorImpl(it, "type");
-		assertEquals(it, iteratorObject.iterator());
-		assertEquals("type", iteratorObject.type);
 	}
 
 	@Test

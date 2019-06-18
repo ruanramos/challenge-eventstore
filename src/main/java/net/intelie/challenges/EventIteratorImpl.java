@@ -12,18 +12,17 @@ public class EventIteratorImpl implements EventIterator {
 		iterator = eventIterator;
 		this.type = type;
 	}
-	
+
 	public Iterator<Event> iterator() {
 		return iterator;
 	}
 
 	/**
-	 * This is the worst optimized part of the code. Since there is a
-	 * tree, we need to check the types of events to see if they are 
-	 * the type of the iterator.
-	 * Could be made better if we stored a hash map of trees, each one with 
-	 * a different type. This way we could just iterate directly into the 
-	 * tree that has only one type of events.
+	 * This is the worst optimized part of the code. Since there is a tree, we need
+	 * to check the types of events to see if they are the type of the iterator.
+	 * Could be made better if we stored a hash map of trees, each one with a
+	 * different type. This way we could just iterate directly into the tree that
+	 * has only one type of events.
 	 */
 	@Override
 	public boolean moveNext() {
@@ -38,9 +37,6 @@ public class EventIteratorImpl implements EventIterator {
 		return false;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public Event current() throws IllegalStateException {
 		if (currentEvent == null) {
@@ -49,9 +45,6 @@ public class EventIteratorImpl implements EventIterator {
 		return currentEvent;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void remove() throws IllegalStateException {
 		if (currentEvent == null) {
@@ -60,6 +53,10 @@ public class EventIteratorImpl implements EventIterator {
 		iterator.remove();
 	}
 
+	/**
+	 * Since we are not holding releasable resources, the is no need to implement
+	 * the method close nor necessity to test it.
+	 */
 	@Override
 	public void close() throws Exception {
 	}
