@@ -37,8 +37,8 @@ public class EventStoreImpl implements EventStore {
 	 * threads trying to access or modify data. Since the methods have been tested,
 	 * it's plausible to think there will be no occurrences of deadlocks. On the
 	 * other hand, thread priorities where not taken into account here, so we can't
-	 * talk too much about starvation freedom, but with equal priorities it's
-	 * unlikely to happen.
+	 * talk too much about starvation, but with equal priorities it's unlikely to
+	 * happen.
 	 */
 
 	private final TreeSet<Event> set;
